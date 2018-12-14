@@ -9,12 +9,12 @@ A Node.js wrapper for the WooCommerce REST API. Easily interact with the WooComm
 ## Installation
 
 ```
-npm install --save woocommerce-api
+npm install --save woocommerce-api-heades-suport
 ```
 
 ## Getting started
 
-Generate API credentials (Consumer Key & Consumer Secret) following this instructions <http://docs.woocommerce.com/document/woocommerce-rest-api/>
+Use jwt tikens
 .
 
 Check out the WooCommerce API endpoints and data that can be manipulated in <http://woocommerce.github.io/woocommerce-rest-api-docs/>.
@@ -28,8 +28,7 @@ var WooCommerceAPI = require('woocommerce-api');
 
 var WooCommerce = new WooCommerceAPI({
   url: 'http://example.com',
-  consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-  consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  tokenJwt: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   wpAPI: true,
   version: 'wc/v1'
 });
@@ -42,8 +41,7 @@ var WooCommerceAPI = require('woocommerce-api');
 
 var WooCommerce = new WooCommerceAPI({
   url: 'http://example.com',
-  consumerKey: 'ck_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-  consumerSecret: 'cs_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  tokenJwt: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   version: 'v3'
 });
 ```
@@ -53,8 +51,7 @@ var WooCommerce = new WooCommerceAPI({
 |       Option      |    Type   | Required |                                               Description                                                |
 |-------------------|-----------|----------|----------------------------------------------------------------------------------------------------------|
 | `url`             | `String`  | yes      | Your Store URL, example: http://woo.dev/                                                                 |
-| `consumerKey`     | `String`  | yes      | Your API consumer key                                                                                    |
-| `consumerSecret`  | `String`  | yes      | Your API consumer secret                                                                                 |
+| `tokenJwt`        | `String`  | yes      | JWT token                                                                                    |
 | `wpAPI`           | `Bool`    | no       | Allow requests to the WP REST API (WooCommerce 2.6 or later)                                             |
 | `wpAPIPrefix`     | `String`  | no       | Custom WP REST API URL prefix, used to support custom prefixes created with the `rest_url_prefix` filter |
 | `version`         | `String`  | no       | API version, default is `v3`                                                                             |
@@ -109,17 +106,4 @@ WooCommerce.getAsync('products').then(function(result) {
 
 ## Release History
 
-- 2016-12-14 - v1.4.2 - Fixed WordPress 4.7 compatibility.
-- 2016-09-28 - v1.4.1 - Updated dependencies and updated/fixed oAuth1.0a.
-- 2016-06-30 - v1.4.0 - Added `wpAPIPrefix` option to allow custom WP REST API Url prefix and support for promified methods.
-- 2016-06-09 - v1.3.2 - Fixed oAuth signature for WP REST API.
-- 2016-06-08 - v1.3.1 - Fixed README.md.
-- 2016-06-03 - v1.3.0 - Added new `timeout` option and updated dependencies.
-- 2016-05-09 - v1.2.0 - Added support for WP REST API and added method to do HTTP OPTIONS requests.
-- 2016-03-18 - v1.1.1 - Added support for ports.
-- 2016-02-22 - v1.1.0 - Added `queryStringAuth` option to allow Basic Authentication as query string.
-- 2015-12-07 - v1.0.4 - Updated dependencies and fixed brackets when sorting query string.
-- 2015-12-07 - v1.0.3 - Added method to properly sort query strings when using oAuth.
-- 2015-07-11 - v1.0.2 - Fixed the examples on example.js and README.md.
-- 2015-07-11 - v1.0.1 - Added unit tests, improved the main class and added full description on README.md.
-- 2015-07-11 - v1.0.0 - Initial release.
+- 2018-12-14 - v1.1.0 - Remove secret key

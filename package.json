@@ -1,7 +1,7 @@
 {
   "name": "woocommerce-api-heades-suport",
   "description": "A Node.js wrapper for the WooCommerce REST API",
-  "version": "1.4.2",
+  "version": "1.0.0",
   "scripts": {
     "lint": "jshint .",
     "checkStyle": "jscs .",
@@ -34,6 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:petrozavodsky/wc-api-node.git"
-  }
+    "url": "git+ssh://git@github.com/petrozavodsky/wc-api-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/petrozavodsky/wc-api-node/issues"
+  },
+  "homepage": "https://github.com/petrozavodsky/wc-api-node#readme"
 }

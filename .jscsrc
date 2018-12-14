@@ -2,7 +2,8 @@
   "excludeFiles": [
     "**/node_modules/**",
     "coverage",
-    "data"
+    "data",
+    "./index.js"
   ],
   "requireLineFeedAtFileEnd": true,
   "disallowMultipleLineBreaks": true,

@@ -1,5 +1,5 @@
 {
-  "name": "woocommerce-api",
+  "name": "woocommerce-api-heades-suport",
   "description": "A Node.js wrapper for the WooCommerce REST API",
   "version": "1.4.2",
   "scripts": {
@@ -34,6 +34,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:woocommerce/wc-api-node.git"
+    "url": "git@github.com:petrozavodsky/wc-api-node.git"
   }
 }

@@ -1,8 +1,6 @@
 'use strict';
 
 var request = require('request');
-var OAuth   = require('oauth-1.0a');
-var crypto  = require('crypto');
 var promise = require('bluebird');
 var _url    = require('url');
 
@@ -28,8 +26,8 @@ function WooCommerceAPI(opt) {
     throw new Error('consumerKey is required');
   }
 
-  if (!(opt.consumerSecret)) {
-    throw new Error('consumerSecret is required');
+  if (!(opt.tokenJwt)) {
+    throw new Error('JWT token is required');
   }
 
   this.classVersion = '1.4.2';
@@ -47,8 +45,7 @@ WooCommerceAPI.prototype._setDefaultsOptions = function(opt) {
   this.wpAPIPrefix     = opt.wpAPIPrefix || 'wp-json';
   this.version         = opt.version || 'v3';
   this.isSsl           = /^https/i.test(this.url);
-  this.consumerKey     = opt.consumerKey;
-  this.consumerSecret  = opt.consumerSecret;
+  this.tokenJwt        = opt.tokenJwt;
   this.verifySsl       = false === opt.verifySsl ? false : true;
   this.encoding        = opt.encoding || 'utf8';
   this.queryStringAuth = opt.queryStringAuth || false;
@@ -117,30 +114,6 @@ WooCommerceAPI.prototype._getUrl = function(endpoint) {
   return url;
 };
 
-/**
- * Get OAuth
- *
- * @return {Object}
- */
-WooCommerceAPI.prototype._getOAuth = function() {
-  var data = {
-    consumer: {
-      key: this.consumerKey,
-      secret: this.consumerSecret
-    },
-    signature_method: 'HMAC-SHA256',
-    hash_function: function(base_string, key) {
-        return crypto.createHmac('sha256', key).update(base_string)
-          .digest('base64');
-    }
-  };
-
-  if (-1 < [ 'v1', 'v2' ].indexOf(this.version)) {
-    data.last_ampersand = false;
-  }
-
-  return new OAuth(data);
-};
 
 /**
  * Do requests
@@ -166,30 +139,8 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
     }
   };
 
-  if (this.isSsl) {
-    if (this.queryStringAuth) {
-      params.qs = {
-        consumer_key: this.consumerKey,
-        consumer_secret: this.consumerSecret
-      };
-    } else {
-      params.auth = {
-        user: this.consumerKey,
-        pass: this.consumerSecret
-      };
-    }
-
-    if (!this.verifySsl) {
-      params.strictSSL = false;
-    }
-  } else {
-    params.qs = this._getOAuth().authorize({
-      url: url,
-      method: method
-    });
-  }
-
   if (data) {
+    params.headers['Authorization'] = 'Bearer ' + this.tokenJwt;
     params.headers['Content-Type'] = 'application/json;charset=utf-8';
     params.body = JSON.stringify(data);
   }

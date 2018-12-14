@@ -22,10 +22,6 @@ function WooCommerceAPI(opt) {
     throw new Error('url is required');
   }
 
-  if (!(opt.consumerKey)) {
-    throw new Error('consumerKey is required');
-  }
-
   if (!(opt.tokenJwt)) {
     throw new Error('JWT token is required');
   }

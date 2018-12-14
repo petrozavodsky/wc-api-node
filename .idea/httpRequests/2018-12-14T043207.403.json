@@ -1,7 +1,0 @@
-{
-  "code": "woocommerce_rest_cannot_view",
-  "message": "Вы не можете просматривать список ресурсов.",
-  "data": {
-    "status": 403
-  }
-}

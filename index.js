@@ -23,7 +23,7 @@ function WooCommerceAPI(opt) {
   }
 
   if (!(opt.tokenJwt)) {
-    throw new Error('JWT token is required');
+    opt.tokenJwt = false;
   }
 
   this.classVersion = '1.4.2';
@@ -136,7 +136,9 @@ WooCommerceAPI.prototype._request = function(method, endpoint, data, callback) {
   };
 
   if (data) {
-    params.headers['Authorization'] = 'Bearer ' + this.tokenJwt;
+    if(this.tokenJwt) {
+      params.headers['Authorization'] = 'Bearer ' + this.tokenJwt;
+    }
     params.headers['Content-Type'] = 'application/json;charset=utf-8';
     params.body = JSON.stringify(data);
   }
